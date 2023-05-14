@@ -1,0 +1,42 @@
+﻿@model QuanLyVatTuPhanXuong.Models.tTho
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tTho</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaTho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaTho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenTho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenTho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BacTho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BacTho)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.MaTho }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

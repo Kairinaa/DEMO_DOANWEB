@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanLyVatTuPhanXuongXeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tNuocSX">
+          <Key>
+            <PropertyRef Name="MaNuoc" />
+          </Key>
+          <Property Name="MaNuoc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenNuoc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tPhanCong">
+          <Key>
+            <PropertyRef Name="MaTho" />
+            <PropertyRef Name="MaXe" />
+          </Key>
+          <Property Name="MaTho" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaXe" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tPhuKien">
+          <Key>
+            <PropertyRef Name="MaPhuKien" />
+          </Key>
+          <Property Name="MaPhuKien" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenPhuKien" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaNuoc" Type="nvarchar" MaxLength="50" />
+          <Property Name="DonGia" Type="int" />
+          <Property Name="SoLuongTonThucTe" Type="int" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tThanhPhan">
+          <Key>
+            <PropertyRef Name="MaXe" />
+            <PropertyRef Name="MaPhuKien" />
+          </Key>
+          <Property Name="MaXe" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaPhuKien" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DVT" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoLuong" Type="int" />
+        </EntityType>
+        <EntityType Name="tTho">
+          <Key>
+            <PropertyRef Name="MaTho" />
+          </Key>
+          <Property Name="MaTho" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenTho" Type="nvarchar" MaxLength="50" />
+          <Property Name="BacTho" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tXe">
+          <Key>
+            <PropertyRef Name="MaXe" />
+          </Key>
+          <Property Name="MaXe" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenXe" Type="nvarchar" MaxLength="50" />
+          <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tPhanCong_tTho">
+          <End Role="tTho" Type="Self.tTho" Multiplicity="1" />
+          <End Role="tPhanCong" Type="Self.tPhanCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tTho">
+              <PropertyRef Name="MaTho" />
+            </Principal>
+            <Dependent Role="tPhanCong">
+              <PropertyRef Name="MaTho" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tPhanCong_tXe">
+          <End Role="tXe" Type="Self.tXe" Multiplicity="1" />
+          <End Role="tPhanCong" Type="Self.tPhanCong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tXe">
+              <PropertyRef Name="MaXe" />
+            </Principal>
+            <Dependent Role="tPhanCong">
+              <PropertyRef Name="MaXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tPhuKien_tNuocSX">
+          <End Role="tNuocSX" Type="Self.tNuocSX" Multiplicity="0..1" />
+          <End Role="tPhuKien" Type="Self.tPhuKien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNuocSX">
+              <PropertyRef Name="MaNuoc" />
+            </Principal>
+            <Dependent Role="tPhuKien">
+              <PropertyRef Name="MaNuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tThanhPhan_tPhuKien">
+          <End Role="tPhuKien" Type="Self.tPhuKien" Multiplicity="1" />
+          <End Role="tThanhPhan" Type="Self.tThanhPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPhuKien">
+              <PropertyRef Name="MaPhuKien" />
+            </Principal>
+            <Dependent Role="tThanhPhan">
+              <PropertyRef Name="MaPhuKien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tThanhPhan_tXe">
+          <End Role="tXe" Type="Self.tXe" Multiplicity="1" />
+          <End Role="tThanhPhan" Type="Self.tThanhPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tXe">
+              <PropertyRef Name="MaXe" />
+            </Principal>
+            <Dependent Role="tThanhPhan">
+              <PropertyRef Name="MaXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyVatTuPhanXuongXeModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNuocSX" EntityType="Self.tNuocSX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tPhanCong" EntityType="Self.tPhanCong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tPhuKien" EntityType="Self.tPhuKien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tThanhPhan" EntityType="Self.tThanhPhan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tTho" EntityType="Self.tTho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tXe" EntityType="Self.tXe" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tPhanCong_tTho" Association="Self.FK_tPhanCong_tTho">
+            <End Role="tTho" EntitySet="tTho" />
+            <End Role="tPhanCong" EntitySet="tPhanCong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tPhanCong_tXe" Association="Self.FK_tPhanCong_tXe">
+            <End Role="tXe" EntitySet="tXe" />
+            <End Role="tPhanCong" EntitySet="tPhanCong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tPhuKien_tNuocSX" Association="Self.FK_tPhuKien_tNuocSX">
+            <End Role="tNuocSX" EntitySet="tNuocSX" />
+            <End Role="tPhuKien" EntitySet="tPhuKien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tThanhPhan_tPhuKien" Association="Self.FK_tThanhPhan_tPhuKien">
+            <End Role="tPhuKien" EntitySet="tPhuKien" />
+            <End Role="tThanhPhan" EntitySet="tThanhPhan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tThanhPhan_tXe" Association="Self.FK_tThanhPhan_tXe">
+            <End Role="tXe" EntitySet="tXe" />
+            <End Role="tThanhPhan" EntitySet="tThanhPhan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyVatTuPhanXuongXeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tNuocSX">
+          <Key>
+            <PropertyRef Name="MaNuoc" />
+          </Key>
+          <Property Name="MaNuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenNuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tPhuKiens" Relationship="Self.FK_tPhuKien_tNuocSX" FromRole="tNuocSX" ToRole="tPhuKien" />
+        </EntityType>
+        <EntityType Name="tPhuKien">
+          <Key>
+            <PropertyRef Name="MaPhuKien" />
+          </Key>
+          <Property Name="MaPhuKien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenPhuKien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaNuoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonGia" Type="Int32" />
+          <Property Name="SoLuongTonThucTe" Type="Int32" />
+          <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tNuocSX" Relationship="Self.FK_tPhuKien_tNuocSX" FromRole="tPhuKien" ToRole="tNuocSX" />
+          <NavigationProperty Name="tThanhPhans" Relationship="Self.FK_tThanhPhan_tPhuKien" FromRole="tPhuKien" ToRole="tThanhPhan" />
+        </EntityType>
+        <EntityType Name="tThanhPhan">
+          <Key>
+            <PropertyRef Name="MaXe" />
+            <PropertyRef Name="MaPhuKien" />
+          </Key>
+          <Property Name="MaXe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaPhuKien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DVT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="tPhuKien" Relationship="Self.FK_tThanhPhan_tPhuKien" FromRole="tThanhPhan" ToRole="tPhuKien" />
+          <NavigationProperty Name="tXe" Relationship="Self.FK_tThanhPhan_tXe" FromRole="tThanhPhan" ToRole="tXe" />
+        </EntityType>
+        <EntityType Name="tTho">
+          <Key>
+            <PropertyRef Name="MaTho" />
+          </Key>
+          <Property Name="MaTho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenTho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BacTho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tXes" Relationship="Self.tPhanCong" FromRole="tTho" ToRole="tXe" />
+        </EntityType>
+        <EntityType Name="tXe">
+          <Key>
+            <PropertyRef Name="MaXe" />
+          </Key>
+          <Property Name="MaXe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenXe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tThanhPhans" Relationship="Self.FK_tThanhPhan_tXe" FromRole="tXe" ToRole="tThanhPhan" />
+          <NavigationProperty Name="tThoes" Relationship="Self.tPhanCong" FromRole="tXe" ToRole="tTho" />
+        </EntityType>
+        <Association Name="FK_tPhuKien_tNuocSX">
+          <End Role="tNuocSX" Type="Self.tNuocSX" Multiplicity="0..1" />
+          <End Role="tPhuKien" Type="Self.tPhuKien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNuocSX">
+              <PropertyRef Name="MaNuoc" />
+            </Principal>
+            <Dependent Role="tPhuKien">
+              <PropertyRef Name="MaNuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tThanhPhan_tPhuKien">
+          <End Role="tPhuKien" Type="Self.tPhuKien" Multiplicity="1" />
+          <End Role="tThanhPhan" Type="Self.tThanhPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPhuKien">
+              <PropertyRef Name="MaPhuKien" />
+            </Principal>
+            <Dependent Role="tThanhPhan">
+              <PropertyRef Name="MaPhuKien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tThanhPhan_tXe">
+          <End Role="tXe" Type="Self.tXe" Multiplicity="1" />
+          <End Role="tThanhPhan" Type="Self.tThanhPhan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tXe">
+              <PropertyRef Name="MaXe" />
+            </Principal>
+            <Dependent Role="tThanhPhan">
+              <PropertyRef Name="MaXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tPhanCong">
+          <End Role="tTho" Type="Self.tTho" Multiplicity="*" />
+          <End Role="tXe" Type="Self.tXe" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QuanLyVatTuPhanXuongXeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tNuocSXes" EntityType="Self.tNuocSX" />
+          <EntitySet Name="tPhuKiens" EntityType="Self.tPhuKien" />
+          <EntitySet Name="tThanhPhans" EntityType="Self.tThanhPhan" />
+          <EntitySet Name="tThoes" EntityType="Self.tTho" />
+          <EntitySet Name="tXes" EntityType="Self.tXe" />
+          <AssociationSet Name="FK_tPhuKien_tNuocSX" Association="Self.FK_tPhuKien_tNuocSX">
+            <End Role="tNuocSX" EntitySet="tNuocSXes" />
+            <End Role="tPhuKien" EntitySet="tPhuKiens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tThanhPhan_tPhuKien" Association="Self.FK_tThanhPhan_tPhuKien">
+            <End Role="tPhuKien" EntitySet="tPhuKiens" />
+            <End Role="tThanhPhan" EntitySet="tThanhPhans" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tThanhPhan_tXe" Association="Self.FK_tThanhPhan_tXe">
+            <End Role="tXe" EntitySet="tXes" />
+            <End Role="tThanhPhan" EntitySet="tThanhPhans" />
+          </AssociationSet>
+          <AssociationSet Name="tPhanCong" Association="Self.tPhanCong">
+            <End Role="tTho" EntitySet="tThoes" />
+            <End Role="tXe" EntitySet="tXes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyVatTuPhanXuongXeModelStoreContainer" CdmEntityContainer="QuanLyVatTuPhanXuongXeEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QuanLyVatTuPhanXuongXeModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNuocSXes">
+            <EntityTypeMapping TypeName="QuanLyVatTuPhanXuongXeModel.tNuocSX">
+              <MappingFragment StoreEntitySet="tNuocSX">
+                <ScalarProperty Name="MaNuoc" ColumnName="MaNuoc" />
+                <ScalarProperty Name="TenNuoc" ColumnName="TenNuoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tPhuKiens">
+            <EntityTypeMapping TypeName="QuanLyVatTuPhanXuongXeModel.tPhuKien">
+              <MappingFragment StoreEntitySet="tPhuKien">
+                <ScalarProperty Name="MaPhuKien" ColumnName="MaPhuKien" />
+                <ScalarProperty Name="TenPhuKien" ColumnName="TenPhuKien" />
+                <ScalarProperty Name="MaNuoc" ColumnName="MaNuoc" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="SoLuongTonThucTe" ColumnName="SoLuongTonThucTe" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tThanhPhans">
+            <EntityTypeMapping TypeName="QuanLyVatTuPhanXuongXeModel.tThanhPhan">
+              <MappingFragment StoreEntitySet="tThanhPhan">
+                <ScalarProperty Name="MaXe" ColumnName="MaXe" />
+                <ScalarProperty Name="MaPhuKien" ColumnName="MaPhuKien" />
+                <ScalarProperty Name="DVT" ColumnName="DVT" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tThoes">
+            <EntityTypeMapping TypeName="QuanLyVatTuPhanXuongXeModel.tTho">
+              <MappingFragment StoreEntitySet="tTho">
+                <ScalarProperty Name="MaTho" ColumnName="MaTho" />
+                <ScalarProperty Name="TenTho" ColumnName="TenTho" />
+                <ScalarProperty Name="BacTho" ColumnName="BacTho" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tXes">
+            <EntityTypeMapping TypeName="QuanLyVatTuPhanXuongXeModel.tXe">
+              <MappingFragment StoreEntitySet="tXe">
+                <ScalarProperty Name="MaXe" ColumnName="MaXe" />
+                <ScalarProperty Name="TenXe" ColumnName="TenXe" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tPhanCong" TypeName="QuanLyVatTuPhanXuongXeModel.tPhanCong" StoreEntitySet="tPhanCong">
+            <EndProperty Name="tTho">
+              <ScalarProperty Name="MaTho" ColumnName="MaTho" />
+            </EndProperty>
+            <EndProperty Name="tXe">
+              <ScalarProperty Name="MaXe" ColumnName="MaXe" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

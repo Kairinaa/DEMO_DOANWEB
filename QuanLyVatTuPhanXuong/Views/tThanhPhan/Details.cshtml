@@ -1,0 +1,50 @@
+﻿@model QuanLyVatTuPhanXuong.Models.tThanhPhan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tThanhPhan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaXe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaXe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaPhuKien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaPhuKien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DVT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DVT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

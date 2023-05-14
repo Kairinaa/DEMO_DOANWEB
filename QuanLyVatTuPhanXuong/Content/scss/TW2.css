@@ -1,0 +1,10 @@
+﻿dd, dt {
+    background:"https://img5.thuthuatphanmem.vn/uploads/2022/01/11/anh-nen-trang-tinh-khoi_013900337.jpg";
+
+  
+    border:"1";
+}
+table dd, dt {
+    height:50px;
+    width:220px;
+}

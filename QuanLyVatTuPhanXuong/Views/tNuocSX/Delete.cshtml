@@ -1,0 +1,44 @@
+﻿@model QuanLyVatTuPhanXuong.Models.tNuocSX
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Bạn chắc chắc muốn xoá nó chứ?</h3>
+<div>
+    <h4>tNuocSX</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNuoc)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.MaNuoc)*@
+            @Html.EditorFor(model => model.MaNuoc, new { htmlAttributes = new { @class = "form-control" } })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNuoc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.MaNuoc)
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-default" /> |
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <button type="button" onclick="location.href='@Url.Action("Index", "NuocSX")'">
+        Back to List
+    </button>
+</div>
+    }
+</div>

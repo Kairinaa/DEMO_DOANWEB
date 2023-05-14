@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<QuanLyVatTuPhanXuong.Models.tXe>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+}
+
+<h2>Index</h2>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<p>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            MaXe
+        </th>
+        <th>
+            TenXe
+        </th>
+        <th>
+            GhiChu
+        </th>
+        <th>
+            Settings
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaXe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenXe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaXe }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.MaXe }) |
+                @Html.ActionLink("Xoá", "Delete", new { id = item.MaXe }) |
+                @Html.ActionLink("Thêm mới", "Create") |
+                @Html.ActionLink("Tìm kiếm", "Find")
+            </td>
+        </tr>
+    }
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</table>

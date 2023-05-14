@@ -1,0 +1,8 @@
+﻿dd, dt {
+    background: "https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
+    border: "1";
+}
+table dd, dt {
+    height:50px;
+    width:220px;
+}

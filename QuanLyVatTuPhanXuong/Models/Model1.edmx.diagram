@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b5bdff6363748598ffcd64877432a60" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLyVatTuPhanXuongXeModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyVatTuPhanXuongXeModel.tNuocSX" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyVatTuPhanXuongXeModel.tPhuKien" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyVatTuPhanXuongXeModel.tThanhPhan" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyVatTuPhanXuongXeModel.tTho" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyVatTuPhanXuongXeModel.tXe" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+		  <EntityTypeShape EntityType="QuanLyVatTuPhanXuongXeModel.tPhanCong" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="QuanLyVatTuPhanXuongXeModel.FK_tPhuKien_tNuocSX" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyVatTuPhanXuongXeModel.FK_tThanhPhan_tPhuKien" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyVatTuPhanXuongXeModel.FK_tThanhPhan_tXe" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyVatTuPhanXuongXeModel.tPhanCong" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

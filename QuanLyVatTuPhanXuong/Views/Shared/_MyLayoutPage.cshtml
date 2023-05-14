@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <h1 align="center">QUẢN LÝ VẬT TƯ PHÂN XƯỞNG XE</h1>
+    <table border="1" height="880px" width="100%">
+        <tr>
+            <td colspan="2" height="150px" background="https://img.freepik.com/free-photo/text-space-beige-abstract-banner-background_53876-143103.jpg?w=1800&t=st=1684062202~exp=1684062802~hmac=a66b9386d35071cd57f23302ae4c8001936aae137d77b3fef0f398d21e9ddff2">
+                
+            </td>
+        </tr>
+        <tr>
+            <td height="800px" width="450px">
+                <h2>@Html.ActionLink("Nước SX", "../tNuocSX/Index")</h2>
+                <h2>@Html.ActionLink("Phụ Kiện", "../tPhuKien/Index")</h2>
+                <h2>@Html.ActionLink("Thành Phần", "../tThanhPhan/Index")</h2>
+                <h2>@Html.ActionLink("Thợ", "../tTho/Index")</h2>
+                <h2>@Html.ActionLink("Xe", "../tXe/Index")</h2>
+            </td>
+            <td colspan="2">
+                <div>
+                    @RenderBody()
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" width="40" height="500" background="https://img.freepik.com/premium-photo/funny-illustrated-mechanic-3d-rendered_183364-50173.jpg?w=2000">
+               
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
